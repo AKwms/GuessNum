@@ -12,7 +12,7 @@ import Colors from "./utils/colors";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
-  const [gameIsOVer, setGameIsOver] = useState(true); //initially the game is over, bc before starting the game so the game is over
+  const [gameIsOVer, setGameIsOver] = useState(false); //initially the game is over, bc before starting the game so the game is over
   const [guessRounds, setGuessRounds] = useState(0);
 
   // now the fonts are loaded, you can choose any id f.e. 'open-sans'
@@ -28,7 +28,6 @@ export default function App() {
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
-    setGameIsOver(false);
   }
 
   function gameOverHandler(numberOfRounds) {
@@ -39,6 +38,7 @@ export default function App() {
   function startNewGameHandler() {
     setUserNumber(null);
     setGuessRounds(0);
+    setGameIsOver(false); //set it to be false for the second round !
   }
 
 
@@ -52,7 +52,7 @@ export default function App() {
     );
   }
 
-  if (gameIsOVer && userNumber) {
+  if (gameIsOVer) {
     screen = (
       <GameOverScreen
         roundsNumber={guessRounds}
